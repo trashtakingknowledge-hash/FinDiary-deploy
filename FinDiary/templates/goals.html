@@ -1,0 +1,147 @@
+
+{% extends "base.html" %}
+
+{% block title %}Goals {% endblock %}
+{% block page_heading %}Goals{% endblock %}
+
+{% block content %}
+<section class="goals-page">
+
+    <div class="goals-heading">
+        <div>
+            <h1>Financial Goals</h1>
+            <p>Plan your savings, track progress, and achieve your targets.</p>
+        </div>
+        <button class="goal-primary-btn" id="add-goal-btn" type="button">
+            + Create Goal
+        </button>
+    </div>
+
+    <div class="goals-summary">
+        <article class="goal-summary-card">
+            <span>Total Goals</span>
+            <h2 id="total-goals">0</h2>
+            <small>Your savings targets</small>
+        </article>
+
+        <article class="goal-summary-card">
+            <span>Total Target</span>
+            <h2 id="total-target">₹0</h2>
+            <small>Amount you want to save</small>
+        </article>
+
+        <article class="goal-summary-card">
+            <span>Amount Saved</span>
+            <h2 id="total-saved">₹0</h2>
+            <small>Your current progress</small>
+        </article>
+
+        <article class="goal-summary-card">
+            <span>Goals Completed</span>
+            <h2 id="completed-goals">0</h2>
+            <small>Targets successfully achieved</small>
+        </article>
+    </div>
+
+    <div class="goals-section-heading">
+        <div>
+            <h2>Your Goals</h2>
+            <p>Monitor your progress toward each financial target.</p>
+        </div>
+
+        <select id="goal-status-filter" aria-label="Filter goals by status">
+            <option value="ALL">All Goals</option>
+            <option value="ACTIVE">Active</option>
+            <option value="COMPLETED">Completed</option>
+            <option value="PAUSED">Paused</option>
+        </select>
+    </div>
+
+    <div id="goals-message" class="goals-message" role="status"></div>
+
+    <div id="goals-container" class="goals-grid">
+        <div class="goals-empty">Loading your goals...</div>
+    </div>
+
+    <div id="goal-modal" class="goal-modal" hidden>
+        <div class="goal-modal-backdrop" data-close-modal></div>
+
+        <section class="goal-modal-content"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="goal-modal-title">
+
+            <div class="goal-modal-heading">
+                <div>
+                    <h2 id="goal-modal-title">Create Financial Goal</h2>
+                    <p>Set a target and start saving.</p>
+                </div>
+                <button type="button" class="goal-close-btn"
+                        id="close-goal-modal" aria-label="Close">×</button>
+            </div>
+
+            <form id="goal-form">
+                <input type="hidden" id="goal-id">
+
+                <label for="goal-name">Goal Name</label>
+                <input type="text" id="goal-name" maxlength="100"
+                       placeholder="e.g. Emergency Fund" required>
+
+                <div class="goal-form-row">
+                    <div>
+                        <label for="goal-target">Target Amount (₹)</label>
+                        <input type="number" id="goal-target"
+                               min="0.01" step="0.01"
+                               placeholder="50000" required>
+                    </div>
+
+                    <div>
+                        <label for="goal-saved">Amount Already Saved (₹)</label>
+                        <input type="number" id="goal-saved"
+                               min="0" step="0.01"
+                               value="0" required>
+                    </div>
+                </div>
+
+                <div class="goal-form-row">
+                    <div>
+                        <label for="goal-deadline">Target Date</label>
+                        <input type="date" id="goal-deadline">
+                    </div>
+
+                    <div>
+                        <label for="goal-status">Status</label>
+                        <select id="goal-status">
+                            <option value="ACTIVE">Active</option>
+                            <option value="PAUSED">Paused</option>
+                            <option value="COMPLETED">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="goal-description">Description (optional)</label>
+                <textarea id="goal-description" rows="3"
+                          maxlength="500"
+                          placeholder="What are you saving for?"></textarea>
+
+                <div class="goal-form-actions">
+                    <button type="button" class="goal-secondary-btn"
+                            id="cancel-goal-btn">Cancel</button>
+                    <button type="submit" class="goal-primary-btn"
+                            id="save-goal-btn">Save Goal</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/goals.css') }}">
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/goals.js') }}" defer></script>
+{% endblock %}

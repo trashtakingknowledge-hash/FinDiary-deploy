@@ -1,0 +1,150 @@
+
+{% extends "base.html" %}
+
+{% block title %}Insights{% endblock %}
+{% block page_heading %}Insights{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/insights.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="insights-page">
+
+    <header class="insights-page-header">
+        <div>
+            <span class="eyebrow">UNDERSTAND YOUR MONEY</span>
+            <h1>Financial Insights</h1>
+            <p>Analyze your income, expenses and spending habits.</p>
+        </div>
+
+        <div class="insights-header-actions">
+            <label class="filter-label" for="insights-period">
+                Date range
+            </label>
+
+            <select id="insights-period" class="insights-select">
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90" selected>Last 90 days</option>
+                <option value="365">Last 12 months</option>
+            </select>
+
+            <button type="button" id="refresh-insights"
+                    class="button">
+                Refresh
+            </button>
+        </div>
+    </header>
+
+    <div id="insights-status"
+         class="insights-status"
+         role="status"
+         aria-live="polite"></div>
+
+    <section class="insights-metric-grid">
+        <article class="insight-metric-card">
+            <div class="insight-metric-label">Total income</div>
+            <div id="insights-income" class="insight-metric-value">₹0</div>
+            <div class="insight-metric-foot">Income in selected period</div>
+        </article>
+
+        <article class="insight-metric-card">
+            <div class="insight-metric-label">Total expenses</div>
+            <div id="insights-expenses" class="insight-metric-value">₹0</div>
+            <div class="insight-metric-foot">Spending in selected period</div>
+        </article>
+
+        <article class="insight-metric-card">
+            <div class="insight-metric-label">Savings rate</div>
+            <div id="insights-savings-rate" class="insight-metric-value">—</div>
+            <div class="insight-metric-foot">Income remaining after expenses</div>
+        </article>
+
+        <article class="insight-metric-card">
+            <div class="insight-metric-label">Average daily spending</div>
+            <div id="insights-daily-average" class="insight-metric-value">₹0</div>
+            <div class="insight-metric-foot">Expenses divided by selected days</div>
+        </article>
+    </section>
+
+    <section class="insights-chart-grid">
+
+        <article class="panel insights-panel">
+            <div class="insights-panel-heading">
+                <div>
+                    <h2>Income vs expenses</h2>
+                    <p>Daily comparison for the selected period.</p>
+                </div>
+            </div>
+
+            <div class="insights-chart-container">
+                <canvas id="income-expense-chart"></canvas>
+                <div id="income-expense-empty"
+                     class="insights-chart-empty" hidden>
+                    No transactions found for this period.
+                </div>
+            </div>
+        </article>
+
+        <article class="panel insights-panel">
+            <div class="insights-panel-heading">
+                <div>
+                    <h2>Spending by category</h2>
+                    <p>Understand where your money goes.</p>
+                </div>
+            </div>
+
+            <div class="insights-doughnut-container">
+                <canvas id="category-chart"></canvas>
+                <div id="category-chart-empty"
+                     class="insights-chart-empty" hidden>
+                    No expense data for this period.
+                </div>
+            </div>
+
+            <div id="category-legend" class="insights-category-legend"></div>
+        </article>
+
+    </section>
+
+    <section class="insights-bottom-grid">
+
+        <article class="panel insights-panel">
+            <div class="insights-panel-heading">
+                <div>
+                    <h2>Spending trend</h2>
+                    <p>Track your daily expenses over time.</p>
+                </div>
+            </div>
+
+            <div class="insights-trend-container">
+                <canvas id="spending-trend-chart"></canvas>
+                <div id="spending-trend-empty"
+                     class="insights-chart-empty" hidden>
+                    No spending data for this period.
+                </div>
+            </div>
+        </article>
+
+        <article class="panel insights-panel">
+            <div class="insights-panel-heading">
+                <div>
+                    <h2>Top spending categories</h2>
+                    <p>Your highest expense categories.</p>
+                </div>
+            </div>
+
+            <div id="top-categories-list" class="insights-category-list"></div>
+        </article>
+
+    </section>
+
+</section>
+{% endblock %}
+
+{% block page_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/insights.js') }}" defer></script>
+{% endblock %}

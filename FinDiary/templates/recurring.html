@@ -1,0 +1,399 @@
+
+{% extends "base.html" %}
+
+{% block title %}Recurring{% endblock %}
+{% block page_heading %}Recurring Transactions{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/recurring.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+<section class="recurring-page">
+
+    <!-- Page Header -->
+    <div class="recurring-page-header">
+        <div>
+            <h1>Financial Recurring</h1>
+            <p>Manage recurring income, subscriptions, and regular expenses.</p>
+        </div>
+
+        <button
+            type="button"
+            class="button button-primary"
+            id="show-recurring-form"
+        >
+            <span aria-hidden="true">＋</span>
+            Add recurring transaction
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="recurring-summary-grid">
+
+        <article class="recurring-summary-card">
+            <div class="recurring-summary-label">
+                Total recurring
+                <span class="recurring-summary-icon">↻</span>
+            </div>
+            <div class="recurring-summary-value" id="recurring-count">—</div>
+        </article>
+
+        <article class="recurring-summary-card">
+            <div class="recurring-summary-label">
+                Monthly expenses
+                <span class="recurring-summary-icon">↘</span>
+            </div>
+            <div
+                class="recurring-summary-value"
+                id="recurring-monthly-expenses"
+            >₹0.00</div>
+        </article>
+
+        <article class="recurring-summary-card income">
+            <div class="recurring-summary-label">
+                Monthly income
+                <span class="recurring-summary-icon">↗</span>
+            </div>
+            <div
+                class="recurring-summary-value"
+                id="recurring-monthly-income"
+            >₹0.00</div>
+        </article>
+
+        <article class="recurring-summary-card">
+            <div class="recurring-summary-label">
+                Next due
+                <span class="recurring-summary-icon">◷</span>
+            </div>
+            <div
+                class="recurring-summary-value"
+                id="recurring-next-due"
+            >—</div>
+        </article>
+
+    </div>
+
+    <!-- Recurring Transaction Form -->
+    <section
+        class="panel recurring-form-panel"
+        id="recurring-form-panel"
+        hidden
+    >
+        <div class="recurring-panel-header">
+            <div>
+                <h2 id="recurring-form-title">Add recurring transaction</h2>
+                <p>Set up a regular income or expense.</p>
+            </div>
+
+            <button
+                type="button"
+                class="button button-secondary"
+                id="cancel-recurring-form"
+            >X</button>
+        </div>
+
+        <form id="recurring-form" class="recurring-form">
+
+            <input
+                type="hidden"
+                name="recurring_id"
+                id="recurring_id"
+            >
+
+            <div class="form-group">
+                <label for="recurring-title">Description *</label>
+                <input
+                    type="text"
+                    id="recurring-title"
+                    name="title"
+                    maxlength="150"
+                    placeholder="e.g. Monthly rent"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-amount">Amount (₹) *</label>
+                <input
+                    type="number"
+                    id="recurring-amount"
+                    name="amount"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="0.00"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-type">Type *</label>
+                <select id="recurring-type" name="type" required>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-category">Category</label>
+                <select id="recurring-category" name="category_id">
+                    <option value="">Select category</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-frequency">Frequency *</label>
+                <select id="recurring-frequency" name="frequency" required>
+    <option value="DAILY">Daily</option>
+    <option value="WEEKLY">Weekly</option>
+    <option value="MONTHLY" selected>Monthly</option>
+    <option value="YEARLY">Yearly</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-start-date">Start date *</label>
+                <input
+                    type="date"
+                    id="recurring-start-date"
+                    name="start_date"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-end-date">End date</label>
+                <input
+                    type="date"
+                    id="recurring-end-date"
+                    name="end_date"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-next-date">Next due date *</label>
+                <input
+                    type="date"
+                    id="recurring-next-date"
+                    name="next_due_date"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recurring-status">Status</label>
+                <select id="recurring-status" name="status">
+                    <option value="ACTIVE">Active</option>
+                    <option value="PAUSED">Paused</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="recurring-notes">Notes</label>
+                <textarea
+                    id="recurring-notes"
+                    name="notes"
+                    rows="3"
+                    maxlength="1000"
+                    placeholder="Optional details..."
+                ></textarea>
+            </div>
+
+            <div class="recurring-form-actions">
+                <button
+                    type="button"
+                    class="button button-secondary"
+                    id="cancel-recurring-form-secondary"
+                >Cancel</button>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                    id="save-recurring-btn"
+                >Save recurring transaction</button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- Recurring Transactions List -->
+    <section class="panel recurring-list-panel">
+
+        <div class="recurring-panel-header">
+            <div>
+                <h2>Your recurring transactions</h2>
+                <p>Review upcoming payments and regular income.</p>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="recurring-toolbar">
+
+            <div class="recurring-search-wrapper">
+                <input
+                    type="search"
+                    id="recurring-search"
+                    placeholder="Search recurring transactions..."
+                    aria-label="Search recurring transactions"
+                >
+            </div>
+
+            <select
+                id="recurring-type-filter"
+                aria-label="Filter by type"
+            >
+                <option value="ALL">All types</option>
+                <option value="INCOME">Income</option>
+                <option value="EXPENSE">Expense</option>
+            </select>
+
+            <select
+                id="recurring-frequency-filter"
+                aria-label="Filter by frequency"
+            >
+                <option value="ALL">All frequencies</option>
+                <option value="WEEKLY">Weekly</option>
+                <option value="MONTHLY">Monthly</option>
+                <option value="QUARTERLY">Quarterly</option>
+                <option value="YEARLY">Yearly</option>
+            </select>
+
+            <select
+                id="recurring-status-filter"
+                aria-label="Filter by status"
+            >
+                <option value="ALL">All statuses</option>
+                <option value="ACTIVE">Active</option>
+                <option value="PAUSED">Paused</option>
+            </select>
+
+        </div>
+
+        <div
+            id="recurring-status-message"
+            class="recurring-status-message"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+        <!-- Table -->
+        <div class="recurring-table-wrapper">
+            <table class="recurring-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Next due</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="recurring-table-body"></tbody>
+            </table>
+        </div>
+        
+<!-- Monthly Payment History Modal -->
+<div id="payment-history-modal" class="payment-history-modal" hidden>
+    <section class="payment-history-dialog">
+        <div class="recurring-panel-header">
+            <div>
+                <h2 id="payment-history-title">Payment History</h2>
+                <p id="payment-history-subtitle">
+                    Track each recurring payment separately.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="button button-secondary"
+                id="close-payment-history"
+            >Close</button>
+        </div>
+
+        <div
+            id="payment-history-message"
+            class="recurring-status-message"
+            role="status"
+        ></div>
+       
+
+        <div class="recurring-table-wrapper">
+            <table class="recurring-table">
+                <thead>
+                    <tr>
+                        <th>Due date</th>
+                        <th>Amount</th>
+                        <th>Payment status</th>
+                        <th>Payment method</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="payment-history-body"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+
+        <!-- Empty State -->
+        <div class="recurring-empty" id="recurring-empty" hidden>
+            <div class="recurring-empty-icon" aria-hidden="true">↻</div>
+            <h3>No recurring transactions found</h3>
+            <p>Add a recurring transaction or adjust your filters.</p>
+        </div>
+
+    </section>
+
+</section>
+<div id="payment-history-modal"
+     class="payment-history-modal"
+     hidden>
+    <section class="payment-history-dialog">
+        <div class="recurring-panel-header">
+            <div>
+                <h2 id="payment-history-title">Payment History</h2>
+                <p id="payment-history-subtitle">
+                    Track each due date separately.
+                </p>
+            </div>
+            <button type="button"
+                    class="button button-secondary"
+                    id="close-payment-history">
+                Close
+            </button>
+        </div>
+
+        <div id="payment-history-message"
+             class="recurring-status-message"
+             role="status"></div>
+
+        <div class="recurring-table-wrapper">
+            <table class="recurring-table">
+                <thead>
+                    <tr>
+                        <th>Due date</th>
+                        <th>Amount</th>
+                        <th>Payment status</th>
+                        <th>Payment method</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="payment-history-body"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script
+    src="{{ url_for('static', filename='js/recurring.js') }}"
+    defer
+></script>
+{% endblock %}

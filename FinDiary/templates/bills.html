@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Bills {% endblock %}
+{% block page_heading %}Bills{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/bills.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="bills-page">
+
+  <div class="page-heading">
+    <div>
+      <span class="eyebrow">PLAN AHEAD</span>
+      <h1>Bills & Reminders</h1>
+      <p>Keep upcoming payments organized and avoid missing due dates.</p>
+    </div>
+
+    
+<button id="show-bill-form"
+        class="button admin-only"
+        type="button">
+    + Add bill
+</button>
+
+  </div>
+
+  <div id="bills-status"
+       class="status-message"
+       role="status"
+       aria-live="polite"></div>
+
+  <!-- Bill summary -->
+  <div class="bills-summary">
+    <article class="bill-summary-card">
+      <span>Total bills: </span>
+      <strong id="bill-count">0</strong>
+      <small>All recorded bills</small>
+    </article>
+
+    <article class="bill-summary-card">
+      <span>Upcoming: </span>
+      <strong id="upcoming-count">0</strong>
+      <small>Payments still due</small>
+    </article>
+
+    <article class="bill-summary-card">
+      <span>Overdue: </span>
+      <strong id="overdue-count">0</strong>
+      <small>Past their due date</small>
+    </article>
+
+    <article class="bill-summary-card">
+      <span>Outstanding amount: </span>
+      <strong id="outstanding-total">₹0.00</strong>
+      <small>Unpaid bills</small>
+    </article>
+  </div>
+
+  <!-- Add or edit bill form -->
+  <section id="bill-form-panel" class="panel bill-form-panel hidden">
+    <div class="panel-heading">
+      <div>
+        <h2 id="bill-form-title">Add a bill</h2>
+        <p class="muted">Enter the payment details below.</p>
+      </div>
+
+      <button id="cancel-bill-form"
+              class="icon-btn"
+              type="button"
+              aria-label="Close bill form">×</button>
+    </div>
+
+    <form id="bill-form" class="bill-form-grid" novalidate>
+      <input type="hidden" name="bill_id">
+
+      <label>
+        Bill name
+        <input name="name"
+               type="text"
+               maxlength="200"
+               placeholder="Electricity bill"
+               required>
+      </label>
+
+      <label>
+        Amount
+        <input name="amount"
+               type="number"
+               min="0.01"
+               step="0.01"
+               placeholder="0.00"
+               required>
+      </label>
+
+      <label>
+        Due date
+        <input name="due_date"
+               type="date"
+               required>
+      </label>
+
+      
+      
+<label>
+    Category
+    <select name="category" id="bill-category" required>
+        <option value="">Loading categories...</option>
+    </select>
+</label>
+
+
+
+      
+      
+  <label>
+      Status
+      <select name="status" id="bill-status" required>
+          <option value="UNPAID">Unpaid</option>
+          <option value="PAID">Paid</option>
+      </select>
+  </label>
+
+  <label id="payment-method-field" class="full-width" hidden>
+      Payment Type
+      <select name="payment_method" id="bill-payment-type">
+          <option value="">Select payment method</option>
+          <option value="Cash">Cash</option>
+          <option value="UPI">UPI</option>
+          <option value="Card">Debit / Credit Card</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+  </label>
+
+
+      <label class="full-width">
+        Notes
+        <textarea name="notes"
+                  rows="3"
+                  maxlength="1000"
+                  placeholder="Optional payment notes"></textarea>
+      </label>
+
+      <div class="form-actions full-width">
+        <button class="button" type="submit" id="save-bill-btn">
+          Save bill
+        </button>
+
+        <button class="button secondary"
+                type="button"
+                id="cancel-bill-form-secondary">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Bill list and filters -->
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <h2>All bills</h2>
+        <p class="muted">Review and manage your payments.</p>
+      </div>
+    </div>
+
+    <div class="bill-toolbar">
+      <input id="bill-search"
+             type="search"
+             placeholder="Search bills..."
+             aria-label="Search bills">
+
+      <select id="bill-status-filter" aria-label="Filter bills by status">
+        <option value="ALL">All statuses</option>
+        <option value="UNPAID">Unpaid</option>
+        <option value="PAID">Paid</option>
+      </select>
+
+      <select id="bill-period-filter" aria-label="Filter bills by due date">
+        <option value="ALL">All due dates</option>
+        <option value="UPCOMING">Upcoming</option>
+        <option value="OVERDUE">Overdue</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table class="bills-table">
+        <thead>
+          <tr>
+            <th>Bill</th>
+            <th>Due date</th>
+            <th>Category</th>
+            <th>Recurrence</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody id="bills-table-body">
+          <tr>
+            <td colspan="7">Loading bills...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p id="bills-empty" class="empty-state hidden">
+      No bills match your search.
+    </p>
+  </section>
+</section>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/bills.js') }}" defer></script>
+{% endblock %}
+
+
+

@@ -1,0 +1,433 @@
+
+/* =========================================
+   ZORVYN — INSIGHTS PAGE
+   File: static/css/insights.css
+   ========================================= */
+
+.insights-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+}
+
+.insights-page-header,
+.insights-header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.insights-page-header p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.insights-header-actions {
+    justify-content: flex-end;
+}
+
+.filter-label {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.insights-select {
+    min-height: 40px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-raised);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.insights-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(157, 119, 255, .12);
+}
+
+.insights-status {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.insights-status:empty {
+    display: none;
+}
+
+.insights-status.error {
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 92, 92, .3);
+    border-radius: 10px;
+    color: #ff8585;
+}
+
+.insights-status.success {
+    color: #68d8b0;
+}
+
+/* Summary metrics */
+
+.insights-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.insight-metric-card {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.insight-metric-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.insight-metric-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.insight-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: var(--surface-raised);
+    color: var(--accent);
+    font-size: 17px;
+}
+
+.insight-icon.income-icon {
+    color: #68d8b0;
+    background: rgba(104, 216, 176, .1);
+}
+
+.insight-icon.expense-icon {
+    color: #ff8585;
+    background: rgba(255, 92, 92, .1);
+}
+
+.insight-metric-value {
+    margin-top: 15px;
+    color: var(--text-primary);
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -.6px;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.insight-metric-foot {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* Chart grids */
+
+.insights-chart-grid,
+.insights-bottom-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+.insights-panel {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.insights-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.insights-panel-heading h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.insights-panel-heading p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Chart containers */
+
+.insights-chart-container,
+.insights-trend-container {
+    position: relative;
+    height: 300px;
+    padding: 20px;
+}
+
+.insights-doughnut-container {
+    position: relative;
+    height: 250px;
+    padding: 16px 22px 8px;
+}
+
+.insights-chart-container canvas,
+.insights-trend-container canvas,
+.insights-doughnut-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.insights-chart-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    color: var(--text-muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.insights-chart-empty[hidden] {
+    display: none !important;
+}
+
+.trend-panel {
+    width: 100%;
+}
+
+/* Category legend */
+
+.insights-category-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 0 22px 22px;
+}
+
+.insights-legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--text-secondary, var(--text-muted));
+    font-size: 12px;
+}
+
+.insights-legend-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.insights-legend-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.insights-legend-name span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.insights-legend-value {
+    color: var(--text-primary);
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+/* Top categories */
+
+.insights-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px;
+}
+
+.insights-top-category {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.insights-top-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary, var(--text-muted));
+    font-size: 12px;
+}
+
+.insights-top-category-header strong {
+    color: var(--text-primary);
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.insights-progress-track {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: var(--surface-raised);
+}
+
+.insights-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+    transition: width .25s ease;
+}
+
+/* Financial snapshot */
+
+.insights-snapshot-list {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 22px;
+}
+
+.insights-snapshot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.insights-snapshot-row:last-child {
+    border-bottom: none;
+}
+
+.insights-snapshot-row strong {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 650;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Accessibility */
+
+.insights-page button:focus-visible,
+.insights-page select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1100px) {
+    .insights-metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .insights-chart-grid,
+    .insights-bottom-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .insights-page {
+        gap: 16px;
+    }
+
+    .insights-page-header {
+        align-items: flex-start;
+    }
+
+    .insights-header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .insights-metric-grid {
+        gap: 10px;
+    }
+
+    .insight-metric-card {
+        padding: 15px;
+    }
+
+    .insight-metric-label {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+    }
+
+    .insight-metric-value {
+        font-size: 20px;
+    }
+
+    .insights-panel-heading {
+        padding: 16px;
+    }
+
+    .insights-chart-container,
+    .insights-trend-container {
+        height: 260px;
+        padding: 14px;
+    }
+
+    .insights-doughnut-container {
+        height: 230px;
+        padding: 12px;
+    }
+
+    .insights-category-legend,
+    .insights-category-list,
+    .insights-snapshot-list {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .insights-metric-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Insights page heading */
+.insights-page-header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+}

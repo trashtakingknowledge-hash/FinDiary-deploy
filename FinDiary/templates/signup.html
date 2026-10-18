@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c18">
+
+    <title>Sign Up | FinDiary</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <main class="signup-page">
+
+        <!-- Left welcome section -->
+        <section class="welcome-section">
+
+            <!-- Logo and brand name: left side only -->
+            <a href="/" class="brand-logo">
+                <img
+                    src="{{ url_for('static', filename='images/LOGO.png') }}"
+                    alt="FinDiary Logo"
+                    class="brand-logo-img">
+                <span>FinDiary<span class="brand-dot"></span></span>
+            </a>
+
+            <div class="welcome-eyebrow">
+                <span class="status-dot"></span>
+                YOUR MONEY, IN FOCUS
+            </div>
+
+            <h1>
+                Start your<br>
+                <span>clearer financial</span><br>
+                future.
+            </h1>
+
+            <p class="welcome-description">
+                Understand your spending, stay ahead of your bills,
+                and build better saving habits with Zorvyn.
+            </p>
+
+            <div class="features-card">
+
+                <div class="features-heading">
+                    <div class="feature-brand-icon">◇</div>
+
+                    <div>
+                        <span class="feature-eyebrow">YOUR FINANCIAL SPACE</span>
+                        <h2>Money, organized.</h2>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">↗</div>
+                    <div>
+                        <h3>Track transactions</h3>
+                        <p>Know where your money goes.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">▤</div>
+                    <div>
+                        <h3>Manage payments</h3>
+                        <p>Keep bills and due dates in view.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">◎</div>
+                    <div>
+                        <h3>Reach your goals</h3>
+                        <p>Make every saving step count.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Right signup form -->
+        <section class="signup-section">
+
+            <div class="signup-card">
+
+                <!-- No logo or brand name inside the form -->
+                <header class="form-heading">
+                    <span class="eyebrow">YOUR PERSONAL WORKSPACE</span>
+                    <h2>Create your account</h2>
+                    <p>Start managing your money with FinDiary.</p>
+                </header>
+
+                <div id="signup-message"
+                     class="signup-message"
+                     role="status"
+                     aria-live="polite"
+                     hidden></div>
+
+                <form id="signup-form" novalidate>
+
+                    <div class="form-group">
+                        <label for="full_name">Full name</label>
+                        <input
+                            type="text"
+                            id="full_name"
+                            name="full_name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            maxlength="150"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            maxlength="254"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Create a password (min. 8 characters)"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="password">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm password</label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="confirm_password">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="signup-btn">
+                        <span class="button-text">Create account</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                </form>
+
+                <p class="login-link">
+                    Already have an account?
+                    <a href="{{ url_for('login_page') }}">Sign in</a>
+                </p>
+
+                <div class="security-note">
+                    <span>◇</span>
+                    <p>Your personal finance space, designed with privacy in mind.</p>
+                </div>
+
+            </div>
+
+            <footer class="signup-footer">
+                <span>© 2026 FinDiary</span>
+                <a href="/">Back to home ↗</a>
+            </footer>
+
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/signup.js') }}"
+            defer></script>
+
+    <script>
+        document.querySelectorAll(".password-toggle").forEach(button => {
+            button.addEventListener("click", () => {
+                const input = document.getElementById(button.dataset.target);
+                const showPassword = input.type === "password";
+
+                input.type = showPassword ? "text" : "password";
+                button.textContent = showPassword ? "Hide" : "Show";
+            });
+        });
+    </script>
+</body>
+</html>

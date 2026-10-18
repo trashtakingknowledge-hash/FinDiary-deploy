@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c18">
+
+    <title>FinDiary | Personal Finance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+         <a href="/" class="logo">
+            <img
+                src="{{ url_for('static', filename='images/LOGO.png') }}"
+                alt="FinDiary Logo"
+                class="brand-mark-img"
+            > 
+            FinDiary<span class="logo-dot"></span>
+        </a>
+
+        <a href="/login" class="login-link">Login <span>→</span></a>
+    </header>
+
+    <!-- Main Landing Section -->
+    <main class="hero">
+
+        <section class="hero-content">
+
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                YOUR MONEY, YOUR CONTROL
+            </div>
+
+            <h1>
+                Take control of<br>
+                your <span>financial future.</span>
+            </h1>
+
+            <p class="hero-description">
+                Track your transactions, manage bills, build savings goals,
+                and understand your spending — all in one place.
+            </p>
+
+            <!-- Available Balance Card -->
+            <div class="hero-actions">
+                <div class="landing-balance-card">
+
+                    <div class="balance-card-top">
+                        <span>Available balance</span>
+                        <span class="balance-wallet-icon">↗</span>
+                    </div>
+
+                    <h3>₹ X,XX,XXX.XX</h3>
+
+                    <p>Your financial picture, simplified</p>
+
+                    <div class="balance-card-bottom">
+                        <span class="balance-accent"></span>
+                        <span>Spend clearly. Save confidently.</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="trust-note">
+                <span class="trust-icon">◇</span>
+                A clearer picture of your financial life.
+            </div>
+
+        </section>
+
+        <!-- Finance Dashboard Preview -->
+        <section class="hero-visual" aria-label="Finance dashboard preview">
+
+            <div class="preview-glow"></div>
+
+            <div class="dashboard-preview">
+
+                <div class="preview-header">
+                    <div>
+                        <span class="preview-eyebrow">YOUR FINANCIAL SPACE</span>
+                        <h2>Money, made clearer.</h2>
+                    </div>
+
+                    <div class="preview-icon">↗</div>
+                </div>
+
+                <div class="balance-card">
+                    <span class="balance-label">Your money overview</span>
+                    <h3>Financial clarity.</h3>
+                    <p>Every transaction tells a story.</p>
+
+                    <div class="chart-bars" aria-hidden="true">
+                        <span style="height: 30%"></span>
+                        <span style="height: 46%"></span>
+                        <span style="height: 38%"></span>
+                        <span style="height: 60%"></span>
+                        <span style="height: 48%"></span>
+                        <span style="height: 74%"></span>
+                        <span style="height: 63%"></span>
+                        <span style="height: 88%"></span>
+                        <span style="height: 72%"></span>
+                        <span style="height: 100%"></span>
+                        <span style="height: 82%"></span>
+                        <span style="height: 94%"></span>
+                    </div>
+
+                    <div class="chart-labels">
+                        <span>Track spending</span>
+                        <span>Build savings</span>
+                    </div>
+                </div>
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <div class="feature-icon income-icon">↗</div>
+                        <div class="feature-copy">
+                            <strong>Transactions</strong>
+                            <span>Track income and expenses</span>
+                        </div>
+                        <span class="feature-arrow">→</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon bills-icon">▤</div>
+                        <div class="feature-copy">
+                            <strong>Bills & payments</strong>
+                            <span>Stay ahead of due dates</span>
+                        </div>
+                        <span class="feature-arrow">→</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon goals-icon">◎</div>
+                        <div class="feature-copy">
+                            <strong>Savings goals</strong>
+                            <span>Make progress that matters</span>
+                        </div>
+                        <span class="feature-arrow">→</span>
+                    </div>
+
+                </div>
+
+                <div class="preview-footer">
+                    <span class="footer-status"></span>
+                    Designed around your financial life
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <span>© 2026 FinDiary</span>
+        <span>Spend clearly. Save confidently.</span>
+    </footer>
+
+</body>
+</html>
+

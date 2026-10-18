@@ -1,0 +1,339 @@
+
+{% extends "base.html" %}
+
+{% block title %}Transactions  {% endblock %}
+
+{% block page_heading %}Transactions{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/transactions.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+<section class="transactions-page">
+
+    <!-- Page Header -->
+    <div class="transactions-page-header">
+        <div>  
+            <h1>Financial Transactions</h1> 
+            <p>Track and manage your income and expenses.</p>
+        </div>
+
+        <button
+            type="button"
+            class="button button-primary"
+            id="show-transaction-form"
+        >
+            <span aria-hidden="true">＋</span>
+            Add transaction
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="transactions-summary-grid">
+
+        <article class="transaction-summary-card">
+            <div class="transaction-summary-label">
+                Total transactions
+                <span class="transaction-summary-icon">↔</span>
+            </div>
+            <div class="transaction-summary-value" id="transaction-count">
+                —
+            </div>
+        </article>
+
+        <article class="transaction-summary-card income">
+            <div class="transaction-summary-label">
+                Total income
+                <span class="transaction-summary-icon">↗</span>
+            </div>
+            <div
+                class="transaction-summary-value"
+                id="transaction-income"
+            >
+                ₹0.00
+            </div>
+        </article>
+
+        <article class="transaction-summary-card expense">
+            <div class="transaction-summary-label">
+                Total expenses
+                <span class="transaction-summary-icon">↘</span>
+            </div>
+            <div
+                class="transaction-summary-value"
+                id="transaction-expenses"
+            >
+                ₹0.00
+            </div>
+        </article>
+
+        <article class="transaction-summary-card">
+            <div class="transaction-summary-label">
+                Net amount
+                <span class="transaction-summary-icon">₹</span>
+            </div>
+            <div
+                class="transaction-summary-value"
+                id="transaction-net"
+            >
+                ₹0.00
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Transaction Form -->
+    <section
+        class="panel transaction-form-panel"
+        id="transaction-form-panel"
+        hidden
+    >
+        <div class="transaction-panel-header">
+            <div>
+                <h2 id="transaction-form-title">Add transaction</h2>
+                <p>Enter the details of your transaction.</p>
+            </div>
+
+            <button
+                type="button"
+                class="button button-secondary"
+                id="cancel-transaction-form"
+            >
+                X
+            </button>
+        </div>
+
+        <form id="transaction-form" class="transaction-form">
+
+            <input type="hidden" name="transaction_id" id="transaction_id">
+
+            <div class="form-group">
+                <label for="transaction-title">Description *</label>
+                <input
+                    type="text"
+                    id="transaction-title"
+                    name="title"
+                    placeholder="e.g. Monthly salary"
+                    maxlength="150"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="transaction-amount">Amount (₹) *</label>
+                <input
+                    type="number"
+                    id="transaction-amount"
+                    name="amount"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="0.00"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="transaction-type">Transaction type *</label>
+                <select id="transaction-type" name="type" required>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transaction-category">Category *</label>
+                <select
+                    id="transaction-category"
+                    name="category_id"
+                    required
+                >
+                    <option value="">Select a category</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transaction-date">Date *</label>
+                <input
+                    type="date"
+                    id="transaction-date"
+                    name="date"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="transaction-payment-method">
+                    Payment method
+                </label>
+                <select
+                    id="transaction-payment-method"
+                    name="payment_method"
+                >
+                    <option value="">Select method</option>
+                    <option value="CASH">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="CARD">Debit/Credit card</option>
+                    <option value="BANK_TRANSFER">Bank transfer</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="transaction-notes">Notes</label>
+                <textarea
+                    id="transaction-notes"
+                    name="notes"
+                    rows="3"
+                    maxlength="1000"
+                    placeholder="Add any additional details..."
+                ></textarea>
+            </div>
+
+            <div class="transaction-form-actions">
+                <button
+                    type="button"
+                    class="button button-secondary"
+                    id="cancel-transaction-form-secondary"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                    id="save-transaction-btn"
+                >
+                    Save transaction
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- Transaction History -->
+    <section class="panel transactions-history-panel">
+
+        <div class="transaction-panel-header">
+            <div>
+                <h2>Transaction history</h2>
+                <p>Search, filter, and review your transactions.</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="transactions-toolbar">
+
+            <div class="transaction-search-wrapper">
+                <input
+                    type="search"
+                    id="transaction-search"
+                    placeholder="Search descriptions or categories..."
+                    aria-label="Search transactions"
+                >
+            </div>
+
+            <select
+                id="transaction-type-filter"
+                aria-label="Filter by transaction type"
+            >
+                <option value="ALL">All types</option>
+                <option value="INCOME">Income</option>
+                <option value="EXPENSE">Expense</option>
+            </select>
+
+            <select
+                id="transaction-category-filter"
+                aria-label="Filter by category"
+            >
+                <option value="ALL">All categories</option>
+            </select>
+
+            <select
+                id="transaction-period-filter"
+                aria-label="Filter by date"
+            >
+                <option value="ALL">All dates</option>
+                <option value="7DAYS">Last 7 days</option>
+                <option value="30DAYS">Last 30 days</option>
+                <option value="THIS_MONTH">This month</option>
+                <option value="THIS_YEAR">This year</option>
+            </select>
+
+        </div>
+
+        <!-- Status Message -->
+        <div
+            id="transactions-status"
+            class="transactions-status"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+        <!-- Table -->
+        <div class="transactions-table-wrapper">
+            <table class="transactions-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Payment method</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactions-table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="transactions-empty" id="transactions-empty" hidden>
+            <div class="transactions-empty-icon" aria-hidden="true">↔</div>
+            <h3>No transactions found</h3>
+            <p>Add a transaction or adjust your search and filters.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="transactions-pagination" id="transactions-pagination">
+            <span id="transactions-pagination-info">
+                No transactions
+            </span>
+
+            <div class="transactions-pagination-actions">
+                <button
+                    type="button"
+                    class="button button-secondary"
+                    id="transactions-prev-page"
+                    disabled
+                >
+                    Previous
+                </button>
+
+                <button
+                    type="button"
+                    class="button button-secondary"
+                    id="transactions-next-page"
+                    disabled
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+</section>
+{% endblock %}
+
+{% block page_js %}
+<script
+    src="{{ url_for('static', filename='js/transactions.js') }}"
+    defer
+></script>
+{% endblock %}

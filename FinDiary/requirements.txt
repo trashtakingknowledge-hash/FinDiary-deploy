@@ -1,0 +1,7 @@
+Flask
+psycopg[binary]
+python-dotenv
+Werkzeug
+gunicorn
+supabase
+flask-cors

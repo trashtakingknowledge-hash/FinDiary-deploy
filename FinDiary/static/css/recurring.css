@@ -1,0 +1,1780 @@
+
+/* =========================================
+   ZORVYN — RECURRING TRANSACTIONS
+   File: static/css/recurring.css
+   ========================================= */
+
+.recurring-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+}
+
+/* Page header */
+
+.recurring-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.recurring-page-header p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Summary cards */
+
+.recurring-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.recurring-summary-card {
+    min-width: 0;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.recurring-summary-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.recurring-summary-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.recurring-summary-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: var(--surface-raised);
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.recurring-summary-value {
+    margin-top: 15px;
+    color: var(--text-primary);
+    font-size: clamp(21px, 2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.recurring-summary-card.income .recurring-summary-icon {
+    color: #68d8b0;
+    background: rgba(104, 216, 176, 0.1);
+}
+
+.recurring-summary-card.income .recurring-summary-value {
+    color: #68d8b0;
+}
+
+/* Panels */
+
+.recurring-form-panel,
+.recurring-list-panel {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.recurring-form-panel[hidden] {
+    display: none !important;
+}
+
+.recurring-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.recurring-panel-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.recurring-panel-header p {
+    margin: 5px 0 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* Form */
+
+.recurring-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 22px;
+}
+
+.recurring-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.recurring-form .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.recurring-form label {
+    color: var(--text-secondary, var(--text-muted));
+    font-size: 13px;
+    font-weight: 550;
+}
+
+.recurring-form input,
+.recurring-form select,
+.recurring-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: var(--surface-raised);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+}
+
+.recurring-form textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.recurring-form input:focus,
+.recurring-form select:focus,
+.recurring-form textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(157, 119, 255, 0.12);
+}
+
+.recurring-form input::placeholder,
+.recurring-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.recurring-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    padding-top: 5px;
+}
+
+/* Search and filters */
+
+.recurring-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.recurring-search-wrapper {
+    flex: 1 1 230px;
+    min-width: 0;
+}
+
+.recurring-search-wrapper input,
+.recurring-toolbar select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    background: var(--surface-raised);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+}
+
+.recurring-search-wrapper input::placeholder {
+    color: var(--text-muted);
+}
+
+.recurring-search-wrapper input:focus,
+.recurring-toolbar select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(157, 119, 255, 0.12);
+}
+
+.recurring-toolbar select {
+    flex: 0 1 155px;
+    cursor: pointer;
+}
+
+/* Table */
+
+.recurring-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.recurring-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.recurring-table th {
+    padding: 14px 18px;
+    background: var(--surface-raised);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.65px;
+    text-transform: uppercase;
+}
+
+.recurring-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary, var(--text-muted));
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.recurring-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.recurring-table tbody tr:hover {
+    background: var(--surface-raised);
+}
+
+.recurring-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.recurring-description {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.recurring-category {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.recurring-amount {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Type and status badges */
+
+.recurring-type,
+.recurring-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.recurring-type.income {
+    color: #68d8b0;
+    background: rgba(104, 216, 176, 0.1);
+    border-color: rgba(104, 216, 176, 0.18);
+}
+
+.recurring-type.expense {
+    color: #ff8585;
+    background: rgba(255, 92, 92, 0.1);
+    border-color: rgba(255, 92, 92, 0.18);
+}
+
+.recurring-status.active {
+    color: #68d8b0;
+    background: rgba(104, 216, 176, 0.1);
+    border-color: rgba(104, 216, 176, 0.18);
+}
+
+.recurring-status.paused {
+    color: #e9b96e;
+    background: rgba(233, 185, 110, 0.1);
+    border-color: rgba(233, 185, 110, 0.18);
+}
+
+/* Row actions */
+
+.recurring-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 7px;
+}
+
+.recurring-action-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 32px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary, var(--text-muted));
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.recurring-action-btn:hover {
+    background: var(--surface-raised);
+    color: var(--text-primary);
+}
+
+.recurring-action-btn.delete:hover {
+    border-color: rgba(255, 92, 92, 0.35);
+    color: #ff8585;
+}
+
+.recurring-action-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Messages */
+
+.recurring-status-message {
+    margin: 16px 22px 0;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.recurring-status-message:empty {
+    display: none;
+}
+
+.recurring-status-message.success {
+    border-color: rgba(104, 216, 176, 0.3);
+    color: #68d8b0;
+}
+
+.recurring-status-message.error {
+    border-color: rgba(255, 92, 92, 0.3);
+    color: #ff8585;
+}
+
+/* Empty state */
+
+.recurring-empty {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.recurring-empty[hidden] {
+    display: none !important;
+}
+
+.recurring-empty-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    background: var(--surface-raised);
+    color: var(--accent);
+    font-size: 23px;
+}
+
+.recurring-empty h3 {
+    margin: 0 0 8px;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.recurring-empty p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Accessibility */
+
+.recurring-page button:focus-visible,
+.recurring-page select:focus-visible,
+.recurring-page a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    .recurring-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .recurring-page {
+        gap: 16px;
+    }
+
+    .recurring-page-header {
+        align-items: flex-start;
+    }
+
+    .recurring-summary-grid {
+        gap: 10px;
+    }
+
+    .recurring-summary-card {
+        padding: 15px;
+    }
+
+    .recurring-summary-value {
+        font-size: 21px;
+    }
+
+    .recurring-panel-header,
+    .recurring-toolbar {
+        padding: 15px;
+    }
+
+    .recurring-toolbar select {
+        flex: 1 1 130px;
+    }
+
+    .recurring-form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 16px;
+    }
+
+    .recurring-form .form-group.full-width,
+    .recurring-form-actions {
+        grid-column: auto;
+    }
+
+    .recurring-form-actions {
+        justify-content: stretch;
+    }
+
+    .recurring-form-actions .button {
+        flex: 1;
+    }
+
+    .recurring-status-message {
+        margin: 15px 15px 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .recurring-summary-label {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+    }
+
+    .recurring-summary-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .recurring-summary-value {
+        font-size: 19px;
+    }
+}
+
+.recurring-page-header h1 {
+    margin: 0 0 8px;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary, #f1f2fa);
+}
+
+/* Recurring Transaction Popup */
+#recurring-form-panel[hidden] {
+    display: none !important;
+}
+
+#recurring-form-panel:not([hidden]) {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    width: min(760px, calc(100% - 32px));
+    max-height: 90vh;
+    margin: auto;
+    padding: 30px;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    background: #11121f;
+    color: #eef0fa;
+    border: 1px solid #292c43;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgb(0 0 0 / 55%);
+}
+
+/* Background overlay */
+body.recurring-modal-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgb(0 0 0 / 65%);
+}
+
+/* Popup heading */
+#recurring-form-panel .recurring-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+#recurring-form-panel .recurring-panel-header h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #eef0fa;
+}
+
+#recurring-form-panel .recurring-panel-header p {
+    margin: 0;
+    color: #a0a3b8;
+    font-size: 16px;
+}
+
+/* Form fields */
+#recurring-form-panel .recurring-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 20px;
+}
+
+#recurring-form-panel .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+#recurring-form-panel .form-group label {
+    color: #e5e7f2;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#recurring-form-panel .recurring-form input,
+#recurring-form-panel .recurring-form select,
+#recurring-form-panel .recurring-form textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    background: #11121f;
+    border: 1px solid #292c43;
+    border-radius: 12px;
+    color: #eef0fa;
+    font: inherit;
+    font-size: 16px;
+}
+
+#recurring-form-panel .recurring-form textarea {
+    min-height: 108px;
+    resize: vertical;
+}
+
+#recurring-form-panel .recurring-form input::placeholder,
+#recurring-form-panel .recurring-form textarea::placeholder {
+    color: #a0a3b8;
+    opacity: 1;
+}
+
+#recurring-form-panel .recurring-form input:focus,
+#recurring-form-panel .recurring-form select:focus,
+#recurring-form-panel .recurring-form textarea:focus {
+    outline: none;
+    border-color: #9561ff;
+    box-shadow: 0 0 0 2px rgb(149 97 255 / 18%);
+}
+
+#recurring-form-panel .recurring-form input[type="date"] {
+    color-scheme: dark;
+}
+
+#recurring-form-panel .form-group.full-width,
+#recurring-form-panel .recurring-form-actions {
+    grid-column: 1 / -1;
+}
+
+/* Form buttons */
+#recurring-form-panel .recurring-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+#recurring-form-panel .recurring-form-actions .button {
+    min-height: 50px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    #recurring-form-panel:not([hidden]) {
+        width: calc(100% - 24px);
+        max-height: 92vh;
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    #recurring-form-panel .recurring-panel-header h2 {
+        font-size: 23px;
+    }
+
+    #recurring-form-panel .recurring-form {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #recurring-form-panel .form-group.full-width,
+    #recurring-form-panel .recurring-form-actions {
+        grid-column: auto;
+    }
+}
+
+/* Recurring popup header close button */
+#recurring-form-panel .recurring-panel-header > button {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-primary, #eef0fa);
+    font-size: 0;
+    cursor: pointer;
+}
+
+#recurring-form-panel .recurring-panel-header > button::before {
+    content: "×";
+    font-size: 26px;
+    font-weight: 400;
+}
+
+/* Bottom Cancel and Save buttons */
+#recurring-form-panel .recurring-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+}
+
+#recurring-form-panel #cancel-recurring-form-secondary {
+    background: transparent;
+    color: var(--text-primary, #eef0fa);
+    border: 1px solid #292c43;
+    border-radius: 12px;
+    min-height: 50px;
+    padding: 12px 22px;
+}
+
+#recurring-form-panel #save-recurring-btn {
+    background: #8054f6;
+    color: #fff;
+    border: 1px solid #8054f6;
+    border-radius: 12px;
+    min-height: 50px;
+    padding: 12px 22px;
+}
+
+#recurring-form-panel #cancel-recurring-form-secondary:hover {
+    border-color: #8054f6;
+}
+
+#recurring-form-panel #save-recurring-btn:hover {
+    background: #7042e8;
+}
+/* Hide scrollbar while keeping recurring form scrollable */
+#recurring-form-panel,
+#recurring-form {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#recurring-form-panel::-webkit-scrollbar,
+#recurring-form::-webkit-scrollbar {
+    display: none;
+}
+.payment-history-modal[hidden] {
+    display: none !important;
+}
+
+.payment-history-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.payment-history-dialog {
+    width: min(1000px, 100%);
+    max-height: 85vh;
+    overflow: auto;
+    padding: 24px;
+    border-radius: 14px;
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #222);
+}
+
+.payment-history-dialog .recurring-table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+.payment-history-dialog .recurring-table th,
+.payment-history-dialog .recurring-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Recurring pagination — use existing form theme */
+.recurring-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.recurring-pagination-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.recurring-pagination button {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.recurring-pagination button.active,
+.recurring-pagination button:hover:not(:disabled) {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.recurring-pagination button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .recurring-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+/* Payment History modal */
+.payment-history-modal {
+    width: min(1100px, calc(100vw - 32px));
+    height: min(720px, calc(100dvh - 32px));
+    max-height: calc(100dvh - 32px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Fixed header; table section uses remaining space */
+.payment-history-modal .modal-header {
+    flex-shrink: 0;
+}
+
+.payment-history-modal .payment-history-content {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.payment-history-modal .payment-history-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Keep table inside modal */
+.payment-history-modal table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.payment-history-modal th,
+.payment-history-modal td {
+    padding: 12px 14px;
+    overflow-wrap: anywhere;
+}
+
+/* Pagination stays at the bottom */
+.payment-history-modal .pagination {
+    flex-shrink: 0;
+}
+
+/* Smaller screens */
+@media (max-width: 768px) {
+    .payment-history-modal {
+        width: calc(100vw - 20px);
+        height: calc(100dvh - 20px);
+        max-height: calc(100dvh - 20px);
+    }
+
+    .payment-history-modal th,
+    .payment-history-modal td {
+        padding: 9px 6px;
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================
+   PAYMENT HISTORY — DARK FORM THEME
+   ========================================== */
+
+#payment-history-modal[hidden] {
+    display: none !important;
+}
+
+#payment-history-modal.payment-history-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px;
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    overflow: hidden;
+    scrollbar-width: none;
+}
+
+#payment-history-modal::-webkit-scrollbar {
+    display: none;
+}
+
+/* Fixed-size dialog */
+#payment-history-modal .payment-history-dialog {
+    width: min(900px, calc(100vw - 32px));
+    height: min(620px, calc(100dvh - 32px));
+    max-width: 100%;
+    max-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 28px;
+    box-sizing: border-box;
+
+    background: #111221;
+    color: #e5e7eb;
+
+    border: 1px solid #2b2d49;
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+    overflow: hidden;
+    scrollbar-width: none;
+}
+
+#payment-history-modal .payment-history-dialog::-webkit-scrollbar {
+    display: none;
+}
+
+/* Header */
+#payment-history-modal .recurring-panel-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding-bottom: 18px;
+    border-bottom: 1px solid #2b2d49;
+}
+
+#payment-history-modal .recurring-panel-header h2 {
+    margin: 0 0 8px;
+    color: #f3f4f6;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#payment-history-modal .recurring-panel-header p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+/* Loading and occurrence count */
+#payment-history-modal #payment-history-message {
+    flex-shrink: 0;
+    min-height: 20px;
+    margin: 0;
+    padding: 12px 14px;
+
+    color: #d1d5db;
+    background: #17182a;
+    border: 1px solid #30314f;
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+/* Table area: no visible scrollbar */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+
+    overflow: hidden;
+    scrollbar-width: none;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#payment-history-modal .recurring-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    color: #e5e7eb;
+    background: transparent;
+}
+
+#payment-history-modal .recurring-table th {
+    padding: 12px 10px;
+    text-align: left;
+    text-transform: uppercase;
+
+    color: #d1d5db;
+    background: #111221;
+
+    border-bottom: 1px solid #30314f;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+#payment-history-modal .recurring-table td {
+    height: 48px;
+    padding: 10px;
+    color: #e5e7eb;
+
+    border-bottom: 1px solid #292a40;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+#payment-history-modal .recurring-table tbody tr:hover {
+    background: #191a2d;
+}
+
+/* Purple primary buttons */
+#payment-history-modal .button-primary,
+#payment-history-modal .recurring-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 10px 15px;
+    border: 1px solid #8b5cf6;
+    border-radius: 10px;
+
+    background: #8b5cf6;
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#payment-history-modal .button-primary:hover,
+#payment-history-modal .recurring-action-btn:hover {
+    background: #7c3aed;
+    border-color: #7c3aed;
+}
+
+/* Close / secondary buttons */
+#payment-history-modal .button-secondary {
+    padding: 11px 18px;
+    border: 1px solid #30314f;
+    border-radius: 11px;
+
+    background: #111221;
+    color: #e5e7eb;
+
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#payment-history-modal .button-secondary:hover {
+    background: #202139;
+    border-color: #8b5cf6;
+}
+
+/* Payment pagination */
+#payment-history-pagination {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: auto;
+    padding: 12px;
+
+    background: #111221;
+    border: 1px solid #292a40;
+    border-radius: 12px;
+}
+
+#payment-history-pagination button {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px 12px;
+
+    color: #d1d5db;
+    background: #17182a;
+    border: 1px solid #30314f;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#payment-history-pagination button:hover:not(:disabled) {
+    color: #ffffff;
+    background: #292044;
+    border-color: #8b5cf6;
+}
+
+#payment-history-pagination button.active {
+    color: #ffffff;
+    background: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
+#payment-history-pagination button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    #payment-history-modal.payment-history-modal {
+        padding: 10px;
+    }
+
+    #payment-history-modal .payment-history-dialog {
+        width: 100%;
+        height: min(620px, calc(100dvh - 20px));
+        padding: 16px;
+        gap: 12px;
+        border-radius: 16px;
+    }
+
+    #payment-history-modal .recurring-panel-header h2 {
+        font-size: 17px;
+    }
+
+    #payment-history-modal .recurring-table th {
+        padding: 8px 4px;
+        font-size: 10px;
+    }
+
+    #payment-history-modal .recurring-table td {
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+
+    #payment-history-modal .recurring-action-btn {
+        padding: 7px;
+        font-size: 11px;
+    }
+}
+
+/* Payment History: fixed layout + hidden scrollbar */
+
+/* Keep modal at a fixed size */
+#payment-history-modal .payment-history-dialog {
+    height: 490px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Header and message never move */
+#payment-history-modal .recurring-panel-header,
+#payment-history-modal #payment-history-message {
+    flex-shrink: 0;
+}
+
+/* Table area gets remaining space and remains scrollable */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    
+    /* Hide scrollbar, preserve scrolling */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Consistent row height */
+#payment-history-modal .recurring-table th {
+    padding: 8px 10px;
+}
+
+#payment-history-modal .recurring-table td {
+    padding: 8px 10px;
+}
+
+/* Pagination stays at the bottom */
+#payment-history-modal #payment-history-pagination {
+    flex-shrink: 0;
+    margin-top: auto;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    padding-top: 10px;
+    background: transparent;
+    border-top: 1px solid #292c43;
+}
+
+/* Hide modal scrollbars only, not scrolling */
+#payment-history-modal,
+#payment-history-modal .payment-history-dialog {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal::-webkit-scrollbar,
+#payment-history-modal .payment-history-dialog::-webkit-scrollbar {
+    display: none;
+}
+
+/* PAYMENT HISTORY — FINAL LAYOUT FIX */
+
+#payment-history-modal .payment-history-dialog {
+    width: min(1000px, calc(100vw - 32px));
+    height: 600px;
+    max-height: calc(100dvh - 32px);
+    padding: 24px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    overflow: hidden;
+}
+
+/* Header remains in place */
+#payment-history-modal .recurring-panel-header {
+    flex: 0 0 auto;
+    padding: 0 0 14px;
+}
+
+/* Record count remains in place */
+#payment-history-modal #payment-history-message {
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+/* Table occupies available space */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Keep rows compact and consistent */
+#payment-history-modal .recurring-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#payment-history-modal .recurring-table th {
+    padding: 10px 12px;
+}
+
+#payment-history-modal .recurring-table td {
+    height: 42px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+/* Pagination stays at the bottom */
+#payment-history-modal #payment-history-pagination {
+    flex: 0 0 auto;
+    min-height: 48px;
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 0;
+    padding: 10px 0 0;
+    border-top: 1px solid #292c43;
+    background: transparent;
+}
+
+/* Pagination buttons */
+#payment-history-modal #payment-history-pagination button {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 8px 12px;
+    flex-shrink: 0;
+
+    color: #eef0fa;
+    background: #17182a;
+    border: 1px solid #30314f;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#payment-history-modal #payment-history-pagination button.active {
+    color: white;
+    background: #8054f6;
+    border-color: #8054f6;
+}
+
+#payment-history-modal #payment-history-pagination button:hover:not(:disabled) {
+    color: white;
+    background: #7042e8;
+    border-color: #7042e8;
+}
+
+#payment-history-modal #payment-history-pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Hide scrollbar without disabling scrolling */
+#payment-history-modal,
+#payment-history-modal .payment-history-dialog {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal::-webkit-scrollbar,
+#payment-history-modal .payment-history-dialog::-webkit-scrollbar {
+    display: none;
+}
+
+/* Small viewport */
+@media (max-height: 700px) {
+    #payment-history-modal .payment-history-dialog {
+        height: calc(100dvh - 24px);
+        padding: 16px;
+        gap: 8px;
+    }
+
+    #payment-history-modal .recurring-table th,
+    #payment-history-modal .recurring-table td {
+        padding: 6px 8px;
+    }
+}
+
+/* Remove unwanted blue background in Payment History */
+#payment-history-modal .recurring-table,
+#payment-history-modal .recurring-table thead,
+#payment-history-modal .recurring-table tbody,
+#payment-history-modal .recurring-table tr,
+#payment-history-modal .recurring-table th,
+#payment-history-modal .recurring-table td {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove blue row highlight */
+#payment-history-modal .recurring-table tbody tr:hover,
+#payment-history-modal .recurring-table tbody tr:focus,
+#payment-history-modal .recurring-table tbody tr:active {
+    background: transparent !important;
+}
+
+/* Keep subtle separators only */
+#payment-history-modal .recurring-table th,
+#payment-history-modal .recurring-table td {
+    border-bottom: 1px solid #292c43;
+}
+
+/* Keep pagination background consistent with modal */
+#payment-history-modal #payment-history-pagination {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove unwanted blue background in Payment History */
+#payment-history-modal .recurring-table,
+#payment-history-modal .recurring-table thead,
+#payment-history-modal .recurring-table tbody,
+#payment-history-modal .recurring-table tr,
+#payment-history-modal .recurring-table th,
+#payment-history-modal .recurring-table td {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove blue row highlight */
+#payment-history-modal .recurring-table tbody tr:hover,
+#payment-history-modal .recurring-table tbody tr:focus,
+#payment-history-modal .recurring-table tbody tr:active {
+    background: transparent !important;
+}
+
+/* Keep subtle separators only */
+#payment-history-modal .recurring-table th,
+#payment-history-modal .recurring-table td {
+    border-bottom: 1px solid #292c43;
+}
+
+/* Keep pagination background consistent with modal */
+#payment-history-modal #payment-history-pagination {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Fixed Payment History layout */
+#payment-history-modal .payment-history-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    max-height: calc(100dvh - 32px);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Scroll inside table, but hide scrollbar */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pagination stays at the bottom */
+#payment-history-modal #payment-history-pagination {
+    position: static;
+    flex: 0 0 auto;
+    margin-top: auto;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0 0;
+    background: transparent !important;
+    border-top: 1px solid #292c43;
+    box-shadow: none !important;
+}
+
+/* Keep Payment History pagination fixed at the bottom */
+#payment-history-modal .payment-history-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    max-height: calc(100dvh - 32px);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Table fills the available space even when there are fewer records */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pagination remains at the same bottom position */
+#payment-history-modal #payment-history-pagination {
+    flex: 0 0 48px;
+    width: 100%;
+    margin-top: auto;
+    padding: 8px 0 0;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    background: transparent !important;
+    border-top: 1px solid #292c43;
+    box-shadow: none !important;
+}
+
+/* FORCE Payment History pagination to modal bottom */
+
+#payment-history-modal .payment-history-dialog {
+    height: 600px !important;
+    max-height: calc(100dvh - 32px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+/* Let the table area expand even when there are only 2 records */
+#payment-history-modal .recurring-table-wrapper {
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+#payment-history-modal .recurring-table-wrapper::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* Pin pagination to the bottom of the dialog */
+#payment-history-modal #payment-history-pagination {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    background: #11121f !important;
+    border-top: 1px solid #292c43 !important;
+    padding: 10px 0 !important;
+}
+
+/* Reserve space so records don't go behind pagination */
+#payment-history-modal .payment-history-dialog {
+    position: relative !important;
+    padding-bottom: 78px !important;
+}
+
+/* Payment History: hide the page behind the modal */
+#payment-history-modal.payment-history-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+
+    width: 100vw !important;
+    height: 100dvh !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px;
+    box-sizing: border-box;
+
+    /* Opaque dark backdrop hides the underlying page */
+    background: #080910 !important;
+    background-image: none !important;
+
+    overflow: hidden;
+}
+
+/* Keep the history popup above the backdrop */
+#payment-history-modal .payment-history-dialog {
+    position: relative;
+    z-index: 1;
+
+    background: #11121f !important;
+    opacity: 1 !important;
+}
+
+/* Remove transparency from the modal itself */
+#payment-history-modal .payment-history-dialog,
+#payment-history-modal .recurring-table-wrapper,
+#payment-history-modal #payment-history-pagination {
+    background-image: none !important;
+}
+
+
+
+.history-payment-method-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    background: var(--surface, #111222);
+    border: 1px solid var(--border, #303047);
+    border-radius: 12px;
+}
+
+.history-payment-method-group select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #303047;
+    border-radius: 9px;
+    background: #111222;
+    color: #f3f3fb;
+}
+
+.history-payment-method-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.history-payment-method-actions button {
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #8957f5;
+    color: white;
+    cursor: pointer;
+}
+
+.history-payment-method-actions button:last-child {
+    background: #25253a;
+}
+
+
+/* Custom recurring transaction delete modal */
+.recurring-delete-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+}
+
+.recurring-delete-dialog {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px;
+    border: 1px solid var(--border-color, #393945);
+    border-radius: 20px;
+    background: var(--card-bg, #171720);
+    color: var(--text-color, #ffffff);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+    animation: recurringModalIn 0.18s ease-out;
+}
+
+.recurring-delete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: rgba(239, 68, 68, 0.14);
+    color: #ff7777;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.recurring-delete-dialog h2 {
+    margin: 0 0 12px;
+    font-size: 21px;
+}
+
+.recurring-delete-message {
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
+    font-size: 15px;
+}
+
+.recurring-delete-description {
+    margin: 0;
+    color: var(--muted-color, #a5a5b5);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.recurring-delete-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.recurring-delete-actions button {
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.recurring-delete-actions button:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.recurring-delete-cancel {
+    background: #30303d;
+    color: #ffffff;
+}
+
+.recurring-delete-confirm {
+    background: #dc4545;
+    color: #ffffff;
+}
+
+.recurring-delete-actions button:focus-visible {
+    outline: 2px solid #a5cfff;
+    outline-offset: 3px;
+}
+
+body.recurring-modal-open {
+    overflow: hidden;
+}
+
+@keyframes recurringModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .recurring-delete-dialog {
+        padding: 22px;
+    }
+}

@@ -1,0 +1,228 @@
+
+/* ACCOUNT SETTINGS PAGE */
+
+.profile-settings-page {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 22px 0 48px;
+    color: var(--text-primary, #f4f4fa);
+}
+
+.settings-heading {
+    margin-bottom: 26px;
+}
+
+.settings-eyebrow {
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.settings-heading h1 {
+    margin: 8px 0;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.settings-heading p,
+.settings-section-heading p {
+    margin: 6px 0 0;
+    color: var(--text-muted, #a0a2b7);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.settings-card {
+    margin-bottom: 20px;
+    padding: 26px;
+    border: 1px solid var(--border-color, #292b40);
+    border-radius: 16px;
+    background: var(--card-bg, #111221);
+}
+
+.profile-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.settings-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #292044;
+    font-size: 30px;
+}
+
+.profile-summary-info h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.profile-summary-info > p {
+    margin: 6px 0 10px;
+    color: var(--text-muted, #a0a2b7);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.account-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #a5b4fc;
+    font-size: 12px;
+}
+
+.status-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+}
+
+.settings-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.settings-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.14);
+    color: #a78bfa;
+    font-size: 23px;
+}
+
+.settings-section-heading h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.settings-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 20px;
+    min-width: 0;
+}
+
+.settings-field label {
+    color: var(--text-primary, #f4f4fa);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.settings-field input {
+    width: 100%;
+    min-height: 46px;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color, #303248);
+    border-radius: 9px;
+    outline: none;
+    background: var(--input-bg, #0c0d19);
+    color: var(--text-primary, #f4f4fa);
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.settings-field input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.13);
+}
+
+.settings-field input::placeholder {
+    color: #77798f;
+}
+
+.settings-note {
+    margin: 0 0 18px;
+    color: var(--text-muted, #9294aa);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.settings-primary-btn,
+.settings-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.settings-primary-btn {
+    border: 1px solid transparent;
+    background: #805cf4;
+    color: #fff;
+}
+
+.settings-primary-btn:hover {
+    background: #7048e8;
+}
+
+.settings-secondary-btn {
+    border: 1px solid var(--border-color, #34364d);
+    background: transparent;
+    color: var(--text-primary, #f4f4fa);
+}
+
+.settings-secondary-btn:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+@media (max-width: 700px) {
+    .profile-settings-page {
+        padding-top: 16px;
+    }
+
+    .settings-heading h1 {
+        font-size: 30px;
+    }
+
+    .settings-card {
+        padding: 19px;
+    }
+
+    .settings-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .profile-summary-card {
+        align-items: flex-start;
+    }
+}
+.readonly-input {
+    cursor: not-allowed;
+    opacity: 0.75;
+}

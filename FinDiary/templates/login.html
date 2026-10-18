@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c18">
+
+    <title>Login | FinDiary</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Left branding section -->
+        <section class="brand-section">
+
+            <a href="/" class="brand-logo">
+                <img
+                    src="{{ url_for('static', filename='images/LOGO.png') }}"
+                    alt="FinDiary Logo"
+                    class="brand-logo-img"
+                >
+                <span>FinDiary<span class="brand-dot"></span></span>
+             </a>
+
+            <div class="brand-content">
+
+                <span class="eyebrow">
+                    <span class="status-dot"></span>
+                    YOUR MONEY, IN FOCUS
+                </span>
+
+                <h1>
+                    Welcome to a<br>
+                    <span>clearer financial</span><br>
+                    future.
+                </h1>
+
+                <p>
+                    Understand your spending, stay ahead of your bills,
+                    and build better saving habits with Zorvyn.
+                </p>
+
+            </div>
+
+            <div class="login-visual">
+
+                <div class="visual-heading">
+                    <span class="visual-icon">◈</span>
+                    <div>
+                        <span class="visual-label">YOUR FINANCIAL SPACE</span>
+                        <h2>Money, organized.</h2>
+                    </div>
+                </div>
+
+                <div class="visual-divider"></div>
+
+                <div class="visual-feature">
+                    <span class="feature-icon">↗</span>
+                    <div>
+                        <strong>Track transactions</strong>
+                        <p>Know where your money goes.</p>
+                    </div>
+                </div>
+
+                <div class="visual-feature">
+                    <span class="feature-icon">▤</span>
+                    <div>
+                        <strong>Manage payments</strong>
+                        <p>Keep bills and due dates in view.</p>
+                    </div>
+                </div>
+
+                <div class="visual-feature">
+                    <span class="feature-icon">◎</span>
+                    <div>
+                        <strong>Reach your goals</strong>
+                        <p>Make every saving step count.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="brand-footer">
+                Your finances. Your goals. Your control.
+            </p>
+
+        </section>
+
+        <!-- Right login section -->
+        <section class="form-section">
+
+            <div class="form-container">
+
+                <a href="/" class="mobile-logo">
+                    <span class="brand-symbol">↗</span>
+                    <span>FinDiary<span class="brand-dot">.</span></span>
+                </a>
+
+                <div class="form-heading">
+                    <span class="eyebrow">YOUR PERSONAL WORKSPACE</span>
+                    <h2>Sign in to FinDiary</h2>
+                    <p>Welcome back. Let's get you started.</p>
+                </div>
+
+                <!-- Login feedback -->
+                <div id="login-message"
+                     class="login-message"
+                     role="status"
+                     aria-live="polite"
+                     hidden></div>
+
+                <form id="login-form" novalidate>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+
+                        <div class="input-container">
+                            <span class="input-icon" aria-hidden="true">✉</span>
+
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your login ID"
+                                autocomplete="username"
+                                maxlength="254"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="password-heading">
+                            <label for="password">Password</label>
+                        </div>
+
+                        <div class="input-container">
+                            <span class="input-icon" aria-hidden="true">♙</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                id="toggle-password"
+                                class="password-toggle"
+                                aria-label="Show password"
+                                aria-pressed="false">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                        class="login-button">
+
+                        <span class="button-text">Sign in</span>
+                        <span aria-hidden="true">→</span>
+
+                    </button>
+
+                </form>
+                 <!-- Signup link -->
+                <p class="signup-link">
+                    Don't have an account?
+                    <a href="{{ url_for('signup_page') }}">Sign up</a>
+                </p>
+
+                <div class="security-note">
+                    <span aria-hidden="true">◇</span>
+                    <p>Your personal finance space, designed with privacy in mind.</p>
+                </div>
+
+            </div>
+
+            <footer class="page-footer">
+                <span>© 2026 Monify</span>
+                <a href="/">Back to home ↗</a>
+            </footer>
+
+        </section>
+
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='js/login.js') }}"
+        defer>
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+
+{% block title %}Overview{% endblock %}
+{% block page_heading %}Overview{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/overview.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="overview-page">
+
+    <section class="overview-welcome">
+        <div>
+            <span class="eyebrow">YOUR FINANCIAL SPACE</span>
+            <h1>Financial Overview</h1>
+            <p>Track your money, transactions, savings and upcoming bills.</p>
+        </div>
+    </section>
+
+    <div id="overview-message"
+         class="overview-message"
+         role="status"
+         aria-live="polite">
+        Loading your financial overview...
+    </div>
+
+    <section class="metric-grid" aria-label="Financial summary">
+            <article class="metric-card">
+            <span class="metric-label">Total income</span>
+            <strong class="metric-value" id="total-income">₹0.00</strong>
+            <span class="metric-caption">Recorded income</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="metric-label">Total expenses</span>
+            <strong class="metric-value" id="total-expenses">₹0.00</strong>
+            <span class="metric-caption">Recorded expenses</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="metric-label">Net balance</span>
+            <strong class="metric-value" id="total-balance">₹0.00</strong>
+            <span class="metric-caption">Income minus expenses</span>
+        </article>
+
+    </section>
+
+    <section class="overview-grid">
+
+        <article class="overview-panel">
+            <h2>Recent transactions</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-transactions">
+                        <tr>
+                            <td colspan="4">
+                                <div class="overview-empty">Loading transactions...</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+
+        <article class="overview-panel">
+            <h2>Spending breakdown</h2>
+            <div id="spending-breakdown" class="overview-list">
+                <div class="overview-empty">Loading spending data...</div>
+            </div>
+        </article>
+
+        <article class="overview-panel">
+            <h2>Savings goals</h2>
+            <div id="savings-goals" class="overview-list">
+                <div class="overview-empty">Loading savings goals...</div>
+            </div>
+        </article>
+
+        <article class="overview-panel">
+            <h2>Upcoming bills</h2>
+            <div id="upcoming-bills" class="overview-list">
+                <div class="overview-empty">Loading upcoming bills...</div>
+            </div>
+        </article>
+
+    </section>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
+{% endblock %}

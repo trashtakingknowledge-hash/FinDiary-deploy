@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c18">
+
+    <title>{% block title %}Dashboard{% endblock %} | FinDiary</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/layout.css') }}">
+
+    {% block page_css %}{% endblock %}
+
+    <script>
+    (() => {
+        try {
+            const collapsed =
+                localStorage.getItem("findiary-sidebar-collapsed") !== "false";
+
+            document.documentElement.classList.toggle(
+                "sidebar-start-collapsed",
+                collapsed
+            );
+        } catch {}
+    })();
+    </script>
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- Dashboard Sidebar -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand-row">
+                <button
+                    type="button"
+                    id="sidebar-logo"
+                    class="sidebar-logo"
+                    aria-label="Expand sidebar">
+
+                    <img
+                        src="{{ url_for('static', filename='images/LOGO.png') }}"
+                        alt="FinDiary Logo"
+                        class="brand-mark-img">
+
+                    <span class="brand-name">FinDiary<span></span></span>
+                </button>
+
+                <button
+                    type="button"
+                    id="sidebar-toggle"
+                    class="sidebar-toggle"
+                    aria-label="Collapse sidebar"
+                    title="Collapse sidebar">
+                    ←
+                </button>
+            </div>
+
+            <p class="nav-caption">WORKSPACE</p>
+
+            <nav class="nav-list" aria-label="Main navigation">
+
+                <a href="/overview"
+                   class="nav-link {% if active_page == 'overview' %}active{% endif %}"
+                   title="Overview">
+                    <span class="nav-icon">◫</span>
+                    <span>Overview</span>
+                </a>
+
+                <a href="/transactions"
+                   class="nav-link {% if active_page == 'transactions' %}active{% endif %}"
+                   title="Transactions">
+                    <span class="nav-icon">⇄</span>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="/insights"
+                   class="nav-link {% if active_page == 'insights' %}active{% endif %}"
+                   title="Insights">
+                    <span class="nav-icon">✧</span>
+                    <span>Insights</span>
+                </a>
+
+                <a href="/bills"
+                   class="nav-link {% if active_page == 'bills' %}active{% endif %}"
+                   title="Bills">
+                    <span class="nav-icon">▤</span>
+                    <span>Bills</span>
+                </a>
+
+                <a href="/goals"
+                   class="nav-link {% if active_page == 'goals' %}active{% endif %}"
+                   title="Goals">
+                    <span class="nav-icon">◎</span>
+                    <span>Goals</span>
+                </a>
+
+                <a href="/recurring"
+                   class="nav-link {% if active_page == 'recurring' %}active{% endif %}"
+                   title="Recurring">
+                    <span class="nav-icon">⟳</span>
+                    <span>Recurring</span>
+                </a>
+
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-area">
+
+            <header class="topbar">
+
+                <button
+                    type="button"
+                    id="mobile-menu"
+                    class="icon-btn mobile-menu"
+                    aria-label="Open navigation">
+                    ☰
+                </button>
+
+                <div class="crumb">
+                    <span>Workspace</span>
+                    <span class="crumb-sep">/</span>
+                    <strong>{% block page_heading %}Overview{% endblock %}</strong>
+                </div>
+
+                <div class="topbar-actions">
+
+                   
+
+                    <!-- Profile Menu -->
+                    <div class="profile-menu" id="profile-menu">
+
+                        <button
+                            type="button"
+                            id="profile-toggle"
+                            class="button secondary small-btn profile-toggle"
+                            aria-expanded="false"
+                            aria-controls="profile-dropdown">
+
+                            <span class="profile-avatar">👤</span>
+                            <span>{{ session.get('full_name', 'User').split()[0] }}</span>
+                            <span class="profile-chevron"></span>
+                        </button>
+
+                        <!-- Profile Dropdown -->
+                        <div
+                            class="profile-dropdown hidden"
+                            id="profile-dropdown">
+
+                            <div class="profile-details">
+
+                                <div class="profile-avatar-large">👤</div>
+
+                                <div class="profile-user-info">
+                                    <strong>
+                                        {{ session.get('full_name', 'User') }}
+                                    </strong>
+
+                                    <span>
+                                        {{ session.get('email', '') }}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="profile-divider"></div>
+
+                            <a href="/profile"
+                               class="profile-dropdown-item">
+                                <span>⚙</span>
+                                <span>Account Settings</span>
+                            </a>
+
+                            <!-- Sign Out Button -->
+                            <button
+                                type="button"
+                                id="logout-btn"
+                                class="profile-dropdown-item logout-item">
+                                <span>↪</span>
+                                <span>Sign Out</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="page-content">
+                {% block content %}{% endblock %}
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    
+<!-- Logout Confirmation Modal -->
+<div id="logout-modal" class="logout-modal hidden">
+    <div class="logout-dialog">
+
+        <div class="logout-icon-wrapper">
+            <div class="logout-icon">↗</div>
+        </div>
+
+        <span class="logout-badge">FIN DIARY • SESSION</span>
+
+        <h2>Taking a break?</h2>
+
+        <p>
+            You're about to leave your financial space.
+            Ready to sign out?
+        </p>
+
+        <div class="logout-actions">
+            <button
+                type="button"
+                id="cancel-logout"
+                class="logout-cancel">
+                Stay a little
+            </button>
+
+            <button
+                type="button"
+                id="confirm-logout"
+                class="logout-confirm">
+                Sign me out <span>→</span>
+            </button>
+        </div>
+
+        <div class="logout-footer">
+            <span>✦</span> Your finances will be here when you return
+        </div>
+
+    </div>
+</div>
+
+    <!-- Existing JavaScript Files: Preserved -->
+    <script src="{{ url_for('static', filename='js/api.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}" defer></script>
+
+    {% block page_js %}{% endblock %}
+
+    <!-- Profile Dropdown Behaviour: Preserved -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const profileToggle = document.getElementById("profile-toggle");
+        const profileDropdown = document.getElementById("profile-dropdown");
+        const profileMenu = document.getElementById("profile-menu");
+
+        if (!profileToggle || !profileDropdown || !profileMenu) {
+            return;
+        }
+
+        profileToggle.addEventListener("click", function () {
+            const isOpen =
+                profileDropdown.classList.toggle("hidden") === false;
+
+            profileToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!profileMenu.contains(event.target)) {
+                profileDropdown.classList.add("hidden");
+                profileToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                profileDropdown.classList.add("hidden");
+                profileToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+
+{% extends "base.html" %}
+
+{% block title %}Account Settings{% endblock %}
+{% block page_heading %}Account Settings{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-settings-page">
+
+    <div class="settings-heading">
+        <div>
+            <span class="settings-eyebrow">YOUR ACCOUNT</span>
+            <h1>Account Settings</h1>
+            <p>Manage your personal information and account security.</p>
+        </div>
+    </div>
+
+    <!-- Profile Summary -->
+    <section class="settings-card profile-summary-card">
+        <div class="settings-avatar">👤</div>
+
+            <div class="profile-summary-info">
+            <h2 class="profile-summary-name">
+                {{ session.get('full_name', 'User') }}
+            </h2>
+
+            <p class="profile-summary-email">
+                {{ session.get('email', '') }}
+            </p>
+
+            <span class="account-status">
+                <span class="status-indicator"></span>
+                Personal Account
+            </span>
+        </div>
+    </section>
+
+<!-- Personal Information -->
+<section class="settings-card">
+    <div class="settings-section-heading">
+        <div class="settings-icon">♙</div>
+        <div>
+            <h2>Personal Information</h2>
+            <p>View and manage your personal details.</p>
+        </div>
+    </div>
+
+    <form id="personal-info-form">
+        <div class="settings-form-grid">
+            <div class="settings-field">
+                <label for="profile-full-name">Full Name</label>
+                <input
+                    type="text"
+                    id="profile-full-name"
+                    name="full_name"
+                    value="{{ session.get('full_name', '') }}"
+                    placeholder="Enter your full name"
+                    maxlength="100"
+                    required>
+            </div>
+
+            <div class="settings-field">
+                <label for="profile-email">Email Address</label>
+                <input
+                    type="email"
+                    id="profile-email"
+                    name="email"
+                    value="{{ session.get('email', '') }}"
+                    readonly
+                    class="readonly-input">
+            </div>
+        </div>
+
+        <button
+            type="submit"
+            class="settings-primary-btn"
+            id="save-profile-btn">
+            Save Changes
+        </button>
+
+        <p id="profile-message"
+           class="settings-note"
+           role="status"
+           aria-live="polite"></p>
+    </form>
+</section>
+
+
+    <!-- Change Password -->
+    <section class="settings-card">
+        <div class="settings-section-heading">
+            <div class="settings-icon">⌑</div>
+            <div>
+                <h2>Change Password</h2>
+                <p>Update your password to keep your account secure.</p>
+            </div>
+        </div>
+
+        <form id="change-password-form">
+
+            <div class="settings-field">
+                <label for="current-password">Current Password</label>
+                <input
+                    type="password"
+                    id="current-password"
+                    name="current_password"
+                    placeholder="Enter current password"
+                    autocomplete="current-password">
+            </div>
+
+            <div class="settings-form-grid">
+                <div class="settings-field">
+                    <label for="new-password">New Password</label>
+                    <input
+                        type="password"
+                        id="new-password"
+                        name="new_password"
+                        placeholder="Enter new password"
+                        autocomplete="new-password">
+                </div>
+
+                <div class="settings-field">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm_password"
+                        placeholder="Confirm new password"
+                        autocomplete="new-password">
+                </div>
+            </div>
+
+            <p class="settings-note">
+                
+            </p>
+
+            <button type="button" class="settings-primary-btn"
+                    id="update-password-btn">
+                Update Password
+            </button>
+            <p id="password-message" role="status" aria-live="polite"></p>
+        </form>
+    </section>
+
+    <!-- Forgot Password -->
+    <section class="settings-card forgot-password-card">
+        <div class="settings-section-heading">
+            <div class="settings-icon">✉</div>
+            <div>
+                <h2>Forgot Password?</h2>
+                <p>Request a password reset if you cannot remember your current password.</p>
+            </div>
+        </div>
+
+        <form id="forgot-password-form">
+            <div class="settings-field">
+                <label for="reset-email">Registered Email Address</label>
+                <input
+                    type="email"
+                    id="reset-email"
+                    name="email"
+                    value="{{ session.get('email', '') }}"
+                    placeholder="Enter your registered email">
+            </div>
+
+            <p class="settings-note">
+                Password reset instructions will be available after backend integration.
+            </p>
+
+            <button type="button" class="settings-secondary-btn"
+                    id="reset-password-btn">
+                Request Password Reset
+            </button>
+        </form>
+    </section>
+
+</section>
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+{% endblock %}
+{% endblock %}
