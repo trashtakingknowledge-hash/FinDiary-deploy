@@ -2540,21 +2540,19 @@ def update_goal(goal_id):
 
 
 @app.route("/api/goals/<int:goal_id>", methods=["DELETE"])
+@login_required
 def delete_goal_api(goal_id):
-    if not session.get("user_id"):
-        return jsonify({"message": "Please log in first."}), 401
-
     if not supabase:
-        return jsonify({"message": "Database configuration is missing."}), 500
+        return jsonify({
+            "message": "Database is not configured."
+        }), 500
 
     try:
-        user_id = session["user_id"]
-
         result = (
             supabase.table("goals")
             .delete()
             .eq("goal_id", goal_id)
-            .eq("user_id", user_id)
+            .eq("user_id", session["user_id"])
             .execute()
         )
 
@@ -2571,7 +2569,7 @@ def delete_goal_api(goal_id):
     except Exception:
         app.logger.exception("Delete goal API failed")
         return jsonify({
-            "message": "Unable to delete goal right now."
+            "message": "Could not delete goal."
         }), 500
 
 
