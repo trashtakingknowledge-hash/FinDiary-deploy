@@ -2539,6 +2539,42 @@ def update_goal(goal_id):
         }), 500
 
 
+@app.route("/api/goals/<int:goal_id>", methods=["DELETE"])
+def delete_goal_api(goal_id):
+    if not session.get("user_id"):
+        return jsonify({"message": "Please log in first."}), 401
+
+    if not supabase:
+        return jsonify({"message": "Database configuration is missing."}), 500
+
+    try:
+        user_id = session["user_id"]
+
+        result = (
+            supabase.table("goals")
+            .delete()
+            .eq("goal_id", goal_id)
+            .eq("user_id", user_id)
+            .execute()
+        )
+
+        if not result.data:
+            return jsonify({
+                "message": "Goal not found or already deleted."
+            }), 404
+
+        return jsonify({
+            "success": True,
+            "message": "Goal deleted successfully."
+        }), 200
+
+    except Exception:
+        app.logger.exception("Delete goal API failed")
+        return jsonify({
+            "message": "Unable to delete goal right now."
+        }), 500
+
+
 # -------------------------------
 # Insights page
 # -------------------------------
